@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Physical recordings</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<div>
+<div>
+	<h1>Recordings</h1>
+</div>
+<div>
+	<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+</div>
+<div>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign out" class="btn btn-danger"/>
+	</form>
+</div>
+<table>
+	<tr>
+		<th>Artist</th>
+		<th>Title</th>
+		<th>Year</th>
+		<th>Record label</th>
+		<th>Genre</th>
+		<th>Comment</th>
+		<th>Price</th>
+		<th>Format</th>
+		<th>Condition</th>
+		<th sec:authorize="hasAuthority('ADMIN')"></th>
+	</tr>
+	<tr th:each = "recording : ${recordings}">
+		<td th:text="${recording.artist}"></td>
+		<td th:text="${recording.title}"></td>
+		<td th:text="${recording.year}"></td>
+		<td th:text="${recording.label}"></td>
+		<td th:text="${recording.comment}"></td>
+		<td th:text="${recording.price}"></td>
+		<td th:text="${recording.format.format}"></td>
+		<td th:text="${recording.condition.condition}"></td>
+		<td th:text="${recording.genre.genre}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/edit/{id}(id=${recording.id})}">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/delete/{id}(id=${recording.id})}">Delete</a></td>
+	</tr>	
+</table>
+<a class="btn btn-success" href="/add">Add new recording</a>
+</div>
+</body>
+</html>
