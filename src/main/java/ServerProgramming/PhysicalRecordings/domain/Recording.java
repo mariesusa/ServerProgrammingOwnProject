@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -18,15 +16,12 @@ public class Recording {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message = "Artist field cannot be empty")
 	@Size(min=1, max=200)
 	private String artist;
 	
-	@NotEmpty(message = "Title field cannot be empty")
 	@Size(min=1, max=200)
 	private String title;
 	
-	@NotNull(message = "Year cannot be null")
 	@Min(value = 1)
 	private int year;
 	
@@ -143,7 +138,7 @@ public class Recording {
 
 	@Override
 	public String toString() {
-		if (this.format != null && this.condition != null && this.genre != null)
+		if (this.format != null || this.condition != null || this.genre != null)
 		return "Recording [id=" + id + ", artist=" + artist + ", title=" + title + ", year=" + year + ", label=" + label + ", comment=" + comment + ", price=" + price + ", format=" + this.getFormat() + ", condition=" + this.getCondition() + ", genre=" + this.getGenre() + "]";
 		else {
 			return "Recording [id=" + id + ", artist=" + artist + ", title=" + title + ", year=" + year + ", label=" + label + ", comment=" + comment + ", price=" + price + "]";

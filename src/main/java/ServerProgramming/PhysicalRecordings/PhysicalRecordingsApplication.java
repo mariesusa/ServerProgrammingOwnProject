@@ -33,9 +33,9 @@ public class PhysicalRecordingsApplication {
 		return (args) -> {
 			log.info("save new recordings");
 			
+			frepository.save(new Format("Cassette"));
 			frepository.save(new Format("CD"));
 			frepository.save(new Format("Vinyl"));
-			frepository.save(new Format("Cassette"));
 			
 			crepository.save(new Condition("Mint"));
 			crepository.save(new Condition("Mint-"));
@@ -44,9 +44,9 @@ public class PhysicalRecordingsApplication {
 			crepository.save(new Condition("G+"));
 			crepository.save(new Condition("F"));
 			
+			grepository.save(new Genre("Classical"));
 			grepository.save(new Genre("Punk"));
 			grepository.save(new Genre("Rock"));
-			grepository.save(new Genre("Classical"));
 			
 			rrepository.save(new Recording("Artist 1", "Title 1", 2001, "Record label 1", "Blablabla", 21.00, frepository.findByFormat("Vinyl").get(0), crepository.findByCondition("Mint").get(0), grepository.findByGenre("Punk").get(0)));
 			rrepository.save(new Recording("Artist 2", "Title 2", 2002, "Record label 2", "Blablabla", 22.00, frepository.findByFormat("CD").get(0), crepository.findByCondition("Mint-").get(0), grepository.findByGenre("Rock").get(0)));

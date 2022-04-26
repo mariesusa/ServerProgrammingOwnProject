@@ -5,47 +5,62 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
-<body>
-<div>
-<div>
-	<h1>Recordings</h1>
+<body style="background-color:#fff96a">
+<div class="container">
+	<div class="col-md-4">
+		<h1>Recordings</h1>
+	</div>
+<div class="col-md-4">
+	<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h3>
 </div>
-<div>
-	<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
-</div>
-<div>
-	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign out" class="btn btn-danger"/>
-	</form>
-</div>
-<table>
+
+<hr style="color:#b0ffd3">
+
+<div class="table-responsive">
+<table class="table table-hover table-bordered" style="margin-left:5px;border-color:#b0ffd3">
+	<thead>
 	<tr>
-		<th>Artist</th>
-		<th>Title</th>
-		<th>Year</th>
-		<th>Record label</th>
-		<th>Genre</th>
-		<th>Comment</th>
-		<th>Price</th>
-		<th>Format</th>
-		<th>Condition</th>
+		<th scope="col" style="padding:2px">Artist</th>
+		<th scope="col" style="padding:2px">Title</th>
+		<th scope="col" style="padding:2px">Year</th>
+		<th scope="col" style="padding:2px">Record label</th>
+		<th scope="col" style="padding:2px">Comment</th>
+		<th scope="col" style="padding:2px">Price</th>
+		<th scope="col" style="padding:2px">Format</th>
+		<th scope="col" style="padding:2px">Condition</th>
+		<th scope="col" style="padding:2px">Genre</th>
 		<th sec:authorize="hasAuthority('ADMIN')"></th>
 	</tr>
+	</thead>
+	<tbody >
 	<tr th:each = "recording : ${recordings}">
-		<td th:text="${recording.artist}"></td>
-		<td th:text="${recording.title}"></td>
-		<td th:text="${recording.year}"></td>
-		<td th:text="${recording.label}"></td>
-		<td th:text="${recording.comment}"></td>
-		<td th:text="${recording.price}"></td>
-		<td th:text="${recording.format.format}"></td>
-		<td th:text="${recording.condition.condition}"></td>
-		<td th:text="${recording.genre.genre}"></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/edit/{id}(id=${recording.id})}">Edit</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/delete/{id}(id=${recording.id})}">Delete</a></td>
-	</tr>	
+		<td th:text="${recording.artist}" style="padding:2px"></td>
+		<td th:text="${recording.title}" style="padding:2px"></td>
+		<td th:text="${recording.year}" style="padding:2px"></td>
+		<td th:text="${recording.label}" style="padding:2px"></td>
+		<td th:text="${recording.comment}" style="padding:2px"></td>
+		<td th:text="${recording.price}" style="padding:2px"></td>
+		<td th:text="${recording.format.format}" style="padding:2px"></td>
+		<td th:text="${recording.condition.condition}" style="padding:2px"></td>
+		<td th:text="${recording.genre.genre}" style="padding:2px"></td>
+			
+			<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/edit/{id}(id=${recording.id})}" role="button" style="padding:2px">Edit</a></td>
+			
+			<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/delete/{id}(id=${recording.id})}" role="button" style="padding:2px">Delete</a></td>
+	</tr>
+	</tbody>	
 </table>
-<a class="btn btn-success" href="/add">Add new recording</a>
 </div>
+<br>
+<a class="btn btn-success" href="/add" role="button" style="margin-left:10px">Add new recording</a>
+</div>
+
+<br>
+<div class="col-md-4" style="padding:5px">
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign out" class="btn btn-danger" style="padding:5px;margin-left:10px;margin-bottom:5px;background-color:#b0ffd3;cursor:pointer"/>
+	</form>
+</div>
+
 </body>
 </html>

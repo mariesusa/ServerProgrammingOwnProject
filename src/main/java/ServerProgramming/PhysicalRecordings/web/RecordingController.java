@@ -1,5 +1,7 @@
 package ServerProgramming.PhysicalRecordings.web;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ServerProgramming.PhysicalRecordings.domain.ConditionRepository;
 import ServerProgramming.PhysicalRecordings.domain.FormatRepository;
@@ -39,12 +42,20 @@ public class RecordingController {
 		return "login";
 	}
 	
+	//Show all
 	@RequestMapping(value= {"/", "/recordinglist"})
 	public String recordinglist(Model model) {
 		model.addAttribute("recordings", rrepository.findAll());
 		return "recordinglist";
 	}
 	
+	//Show one
+	@RequestMapping(value="/recording/{id}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Recording> findRecordingRest(@PathVariable("id") Long recordingId) {
+		return rrepository.findById(recordingId);
+	}
+	
+	//Add new
 	@RequestMapping(value = "/add")
 	public String addRecording(Model model) {
 		model.addAttribute("recording", new Recording());
@@ -54,16 +65,21 @@ public class RecordingController {
 		return "addrecording";
 	}
 	
+	//Save new
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(@Valid Recording recording, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			System.out.println("A validation error occurred.");
-			return "/addrecording";
+			model.addAttribute("formats", frepository.findAll());
+			model.addAttribute("conditions", crepository.findAll());
+			model.addAttribute("genres", grepository.findAll());
+			return "addrecording";
 		}
 		rrepository.save(recording);
 		return "redirect:recordinglist";
 	}
 	
+	//Delete one
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteRecording(@PathVariable("id") Long id, Model model) {
@@ -71,6 +87,7 @@ public class RecordingController {
 		return "redirect:../recordinglist";
 	}
 	
+	//Edit one
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editRecording(@PathVariable("id") Long id, Model model) {
