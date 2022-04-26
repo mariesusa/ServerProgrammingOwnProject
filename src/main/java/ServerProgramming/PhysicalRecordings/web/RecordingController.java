@@ -1,10 +1,11 @@
 package ServerProgramming.PhysicalRecordings.web;
 
-import java.util.Optional;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +14,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import ServerProgramming.PhysicalRecordings.domain.ConditionRepository;
 import ServerProgramming.PhysicalRecordings.domain.FormatRepository;
 import ServerProgramming.PhysicalRecordings.domain.GenreRepository;
 import ServerProgramming.PhysicalRecordings.domain.Recording;
 import ServerProgramming.PhysicalRecordings.domain.RecordingRepository;
+import ServerProgramming.PhysicalRecordings.domain.Search;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @Controller
@@ -27,6 +28,9 @@ public class RecordingController {
 	
 	@Autowired
 	private RecordingRepository rrepository;
+	
+	@Autowired
+	private Search searchRecordings;
 	
 	@Autowired
 	private FormatRepository frepository;
@@ -43,16 +47,19 @@ public class RecordingController {
 	}
 	
 	//Show all
-	@RequestMapping(value= {"/", "/recordinglist"})
+	@RequestMapping(value= {"/recordinglist"})
 	public String recordinglist(Model model) {
 		model.addAttribute("recordings", rrepository.findAll());
 		return "recordinglist";
 	}
 	
-	//Show one
-	@RequestMapping(value="/recording/{id}", method = RequestMethod.GET)
-	public @ResponseBody Optional<Recording> findRecordingRest(@PathVariable("id") Long recordingId) {
-		return rrepository.findById(recordingId);
+	//Search
+	@RequestMapping("/")
+	public String recordinglist(Model model, @Param("keyword") String keyword) {
+		List<Recording> recordings = searchRecordings.listAll(keyword);
+		model.addAttribute("recordings", recordings);
+		model.addAttribute("keyword", keyword);
+		return "recordinglist";
 	}
 	
 	//Add new

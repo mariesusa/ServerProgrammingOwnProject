@@ -16,16 +16,28 @@
 
 <hr style="color:#b0ffd3">
 
+		<form th:action="@{/}">
+    Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+    &nbsp;
+    <input type="submit" value="Search" style="padding:5px;margin-left:5px;margin-bottom:5px;background-color:#b0ffd3;cursor:pointer" />
+    &nbsp;
+    <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" style="padding:5px;margin-left:5px;margin-bottom:5px;background-color:#b0ffd3;cursor:pointer" />
+</form>
+
+<div style="padding-bottom:3px">
+Searches can be conducted with any categories market with *.
+</div>
+
 <div class="table-responsive">
 <table class="table table-hover table-bordered" style="margin-left:5px;border-color:#b0ffd3">
 	<thead>
 	<tr>
-		<th scope="col" style="padding:2px">Artist</th>
-		<th scope="col" style="padding:2px">Title</th>
-		<th scope="col" style="padding:2px">Year</th>
-		<th scope="col" style="padding:2px">Record label</th>
-		<th scope="col" style="padding:2px">Comment</th>
-		<th scope="col" style="padding:2px">Price</th>
+		<th scope="col" style="padding:2px">Artist*</th>
+		<th scope="col" style="padding:2px">Title*</th>
+		<th scope="col" style="padding:2px">Year*</th>
+		<th scope="col" style="padding:2px">Record label*</th>
+		<th scope="col" style="padding:2px">Comment*</th>
+		<th scope="col" style="padding:2px">Price*</th>
 		<th scope="col" style="padding:2px">Format</th>
 		<th scope="col" style="padding:2px">Condition</th>
 		<th scope="col" style="padding:2px">Genre</th>
@@ -63,4 +75,10 @@
 </div>
 
 </body>
+
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
+</script>
 </html>
