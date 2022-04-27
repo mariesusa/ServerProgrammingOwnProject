@@ -51,7 +51,7 @@ Searches can be conducted with any categories market with *.
 		<td th:text="${recording.year}" style="padding:2px"></td>
 		<td th:text="${recording.label}" style="padding:2px"></td>
 		<td th:text="${recording.comment}" style="padding:2px"></td>
-		<td th:text="${recording.price}" style="padding:2px"></td>
+		<td><span th:text="${#numbers.formatDecimal(recording.price, 0, 'COMMA', 2, 'POINT')}"></span></td>
 		<td th:text="${recording.format.format}" style="padding:2px"></td>
 		<td th:text="${recording.condition.condition}" style="padding:2px"></td>
 		<td th:text="${recording.genre.genre}" style="padding:2px"></td>

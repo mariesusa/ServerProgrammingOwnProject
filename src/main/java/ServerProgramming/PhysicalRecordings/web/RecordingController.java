@@ -87,16 +87,16 @@ public class RecordingController {
 	}
 	
 	//Delete one
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteRecording(@PathVariable("id") Long id, Model model) {
 		rrepository.deleteById(id);
 		return "redirect:../recordinglist";
 	}
 	
 	//Edit one
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editRecording(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("recording", rrepository.findById(id));
 		model.addAttribute("formats", frepository.findAll());

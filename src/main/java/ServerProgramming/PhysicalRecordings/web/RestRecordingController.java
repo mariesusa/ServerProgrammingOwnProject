@@ -1,12 +1,12 @@
 package ServerProgramming.PhysicalRecordings.web;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ServerProgramming.PhysicalRecordings.domain.Recording;
@@ -18,14 +18,25 @@ public class RestRecordingController {
 	@Autowired
 	private RecordingRepository rrepository;
 	
-	@RequestMapping(value="/recordings", method = RequestMethod.GET)
-	public List<Recording> recordinglistRest() {
-		return (List<Recording>) rrepository.findAll();
+	@GetMapping("recordings")
+	Iterable<Recording> getAll() {
+		return rrepository.findAll();
 	}
 	
-	@RequestMapping(value="/recordings/{id}", method = RequestMethod.GET)
-	public Optional<Recording> findRecordingRest(@PathVariable("id") Long id) {
-		return rrepository.findById(id);
+	@PostMapping("recordings")
+	Recording newRecording(@RequestBody Recording newRecording) {
+		return rrepository.save(newRecording);
+	}
+	
+	@PutMapping("/recordings/{id}")
+	Recording replaceRecording(@RequestBody Recording newRecording, @PathVariable Long id) {
+		newRecording.setId(id);
+		return rrepository.save(newRecording);	 
+	}
+	
+	@DeleteMapping("/recordings/{id}")
+	void deleteRecording(@PathVariable Long id) {
+		rrepository.deleteById(id);
 	}
 
 }
