@@ -50,7 +50,7 @@
 	
 	<div style="padding:2px">
 	<label for="format">Format</label><br>
-	<select id="formats" th:field="*{format}" style="margin-left:8px;background-color:#ffffec">
+	<select id="formats" th:field="*{format}" style="margin-left:8px;background-color:#ffffec" class="form-control">
 			<option th:each="format: ${formats}"
 			th:value="${format.id}"
 			th:text="${format.format}" ></option>
@@ -59,7 +59,7 @@
 	
 	<div style="padding:2px">
 	<label for="condition">Condition</label><br>
-	<select id="conditions" th:field="*{condition}" style="margin-left:8px;background-color:#ffffec">
+	<select id="conditions" th:field="*{condition}" style="margin-left:8px;background-color:#ffffec" class="form-control" >
 			<option th:each="condition: ${conditions}"
 			th:value="${condition.id}"
 			th:text="${condition.condition}" ></option>
@@ -68,7 +68,7 @@
 	
 	<div style="padding:2px">
 	<label for="genre">Genre</label><br>
-		<select id="genres" th:field="*{genre}" style="margin-left:8px;background-color:#ffffec">
+		<select id="genres" th:field="*{genre}" style="margin-left:8px;background-color:#ffffec" class="form-control">
 			<option th:each="genre: ${genres}"
 			th:value="${genre.id}"
 			th:text="${genre.genre}" ></option>

@@ -35,23 +35,23 @@ public class RecordingRepositoryTest {
 	
 	@Test
 	public void findByTitleShouldReturnRecording() {
-		List<Recording> recordings = rrepository.findByTitle("Title 1");
-		assertThat(recordings.get(0).getArtist()).isEqualTo("Artist 1");
+		List<Recording> recordings = rrepository.findByTitle("Garbage");
+		assertThat(recordings.get(0).getArtist()).isEqualTo("Garbage");
 	}
 	
 	@Test
 	public void createNewRecording() {
-		Recording recording = new Recording ("Artist 1", "Title 1", 2001, "Record label 1", "Blablabla", 21.00, frepository.findByFormat("Vinyl").get(0), crepository.findByCondition("Mint").get(0), grepository.findByGenre("Punk").get(0));
+		Recording recording = new Recording ("Lagwagon", "Double Plaidium", 1997, "Fat Wreck Chords", "4th album", 39.47, frepository.findByFormat("Vinyl").get(0), crepository.findByCondition("Mint-").get(0), grepository.findByGenre("Punk").get(0));
 		rrepository.save(recording);
 		assertThat(recording.getId()).isNotNull();
 	}
 	
 	@Test
 	public void deleteNewRecording() {
-		List<Recording> recordings = rrepository.findByTitle("Title 1");
+		List<Recording> recordings = rrepository.findByTitle("Garbage");
 		Recording recording = recordings.get(0);
 		rrepository.delete(recording);
-		List<Recording> newRecordings = rrepository.findByTitle("Title 1");
+		List<Recording> newRecordings = rrepository.findByTitle("Garbage");
 		assertThat(newRecordings).hasSize(0); 
 	}
 }
