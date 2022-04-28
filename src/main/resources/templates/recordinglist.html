@@ -28,41 +28,40 @@
 Searches can be conducted with any categories market with *.
 </div>
 
-<div class="table-responsive">
-<table class="table table-hover table-bordered" style="margin-left:5px;border-color:#b0ffd3">
+<table class="table-responsive table table-hover table-bordered" style="margin-left:5px;border-color:#b0ffd3">
 	<thead>
 	<tr>
-		<th scope="col" style="padding:2px">Artist*</th>
-		<th scope="col" style="padding:2px">Title*</th>
-		<th scope="col" style="padding:2px">Year*</th>
-		<th scope="col" style="padding:2px">Record label*</th>
-		<th scope="col" style="padding:2px">Comment*</th>
-		<th scope="col" style="padding:2px">Price*</th>
-		<th scope="col" style="padding:2px">Format</th>
-		<th scope="col" style="padding:2px">Condition</th>
-		<th scope="col" style="padding:2px">Genre</th>
+		<th scope="col" style="padding:2px;text-align:left">Artist*</th>
+		<th scope="col" style="padding:2px;text-align:left">Title*</th>
+		<th scope="col" style="padding:2px;text-align:left">Year*</th>
+		<th scope="col" style="padding:2px;text-align:left">Record label*</th>
+		<th scope="col" style="padding:2px;text-align:left">Comment*</th>
+		<th scope="col" style="padding:2px;text-align:left">Price*</th>
+		<th scope="col" style="padding:2px;text-align:left">Format</th>
+		<th scope="col" style="padding:2px;text-align:left">Condition</th>
+		<th scope="col" style="padding:2px;text-align:left">Genre</th>
 		<th sec:authorize="hasAuthority('ADMIN')"></th>
 	</tr>
 	</thead>
 	<tbody >
 	<tr th:each = "recording : ${recordings}">
-		<td th:text="${recording.artist}" style="padding:2px"></td>
-		<td th:text="${recording.title}" style="padding:2px"></td>
-		<td th:text="${recording.year}" style="padding:2px"></td>
-		<td th:text="${recording.label}" style="padding:2px"></td>
-		<td th:text="${recording.comment}" style="padding:2px"></td>
-		<td><span th:text="${#numbers.formatDecimal(recording.price, 0, 'COMMA', 2, 'POINT')}"></span></td>
-		<td th:text="${recording.format.format}" style="padding:2px"></td>
-		<td th:text="${recording.condition.condition}" style="padding:2px"></td>
-		<td th:text="${recording.genre.genre}" style="padding:2px"></td>
+		<td th:text="${recording.artist}" style="padding:2px;vertical-align:top"></td>
+		<td th:text="${recording.title}" style="padding:2px;vertical-align:top"></td>
+		<td th:text="${recording.year}" style="padding:2px;vertical-align:top"></td>
+		<td th:text="${recording.label}" style="padding:2px;vertical-align:top"></td>
+		<td th:text="${recording.comment}" style="padding:2px;vertical-align:top"></td>
+		<td style="padding:2px;vertical-align:top"><span th:text="${#numbers.formatDecimal(recording.price, 0, 'COMMA', 2, 'POINT')}"></span></td>
+		<td th:text="${recording.format.format}" style="padding:2px;vertical-align:top"></td>
+		<td th:text="${recording.condition.condition}" style="padding:2px;vertical-align:top"></td>
+		<td th:text="${recording.genre.genre}" style="padding:2px;vertical-align:top"></td>
 			
-			<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/edit/{id}(id=${recording.id})}" role="button" style="padding:2px">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')" style="padding:2px;vertical-align:top"><a class="btn btn-success" th:href="@{/edit/{id}(id=${recording.id})}" role="button">Edit</a></td>
 			
-			<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/delete/{id}(id=${recording.id})}" role="button" style="padding:2px">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')" style="padding:2px;vertical-align:top"><a class="btn btn-success" th:href="@{/delete/{id}(id=${recording.id})}" role="button" style="padding:2px">Delete</a></td>
 	</tr>
 	</tbody>	
 </table>
-</div>
+
 <br>
 <a class="btn btn-success" href="/add" role="button" style="margin-left:10px">Add new recording</a>
 </div>

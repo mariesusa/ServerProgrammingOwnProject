@@ -16,10 +16,10 @@ public class Recording {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size(min=1, max=200)
+	@Size(min=1, max=500)
 	private String artist;
 	
-	@Size(min=1, max=200)
+	@Size(min=1, max=500)
 	private String title;
 	
 	@Min(value = 1)

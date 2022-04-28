@@ -48,9 +48,9 @@ public class PhysicalRecordingsApplication {
 			grepository.save(new Genre("Punk"));
 			grepository.save(new Genre("Rock"));
 			
-			rrepository.save(new Recording("Artist 1", "Title 1", 2001, "Record label 1", "Blablabla", 21.00, frepository.findByFormat("Vinyl").get(0), crepository.findByCondition("Mint").get(0), grepository.findByGenre("Punk").get(0)));
-			rrepository.save(new Recording("Artist 2", "Title 2", 2002, "Record label 2", "Blablabla", 22.00, frepository.findByFormat("CD").get(0), crepository.findByCondition("Mint-").get(0), grepository.findByGenre("Rock").get(0)));
-			rrepository.save(new Recording("Artist 3", "Title 3", 2003, "Record label 3", "Blablabla", 23.00, frepository.findByFormat("Cassette").get(0), crepository.findByCondition("VG+").get(0), grepository.findByGenre("Classical").get(0)));
+			rrepository.save(new Recording("Garbage", "Garbage", 1995, "Mushroom Records", "Great debut", 4.00, frepository.findByFormat("Cassette").get(0), crepository.findByCondition("Mint").get(0), grepository.findByGenre("Rock").get(0)));
+			rrepository.save(new Recording("Lagwagon", "Double Plaidium", 1997, "Fat Wreck Chords", "4th album", 39.47, frepository.findByFormat("Vinyl").get(0), crepository.findByCondition("Mint-").get(0), grepository.findByGenre("Punk").get(0)));
+			rrepository.save(new Recording("Pyotr Ilyich Tchaikovsky/The London Symphony Orchestra, André Previn", "Swan Lake, Sleeping Beauty, The Nutcracker", 2014, "Warner Classics", "Ballet music", 5.29, frepository.findByFormat("CD").get(0), crepository.findByCondition("VG+").get(0), grepository.findByGenre("Classical").get(0)));
 			
 			User user1 = new User("user",
 "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
